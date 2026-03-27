@@ -123,50 +123,6 @@ function renderReviews() {
       </div>
     `;
   }).join('');
-  
-  // Initialize Marquee
-  setTimeout(() => initMarquee(grid), 100);
-}
-
-function initMarquee(marqueeTrack) {
-  const marqueeOuter = marqueeTrack.parentElement;
-  if (!marqueeTrack || !marqueeOuter) return;
-
-  const origCards = [...marqueeTrack.children];
-  origCards.forEach(card => {
-    const clone = card.cloneNode(true);
-    clone.setAttribute('aria-hidden', 'true');
-    marqueeTrack.appendChild(clone);
-  });
-
-  let scrollPos = 0;
-  const SPEED = 0.55;
-  let paused = false;
-  let rafId = null;
-  let halfWidth = 0;
-
-  function measureHalf() {
-    halfWidth = marqueeTrack.scrollWidth / 2;
-  }
-
-  function step() {
-    if (!paused && halfWidth > 0) {
-      scrollPos += SPEED;
-      if (scrollPos >= halfWidth) scrollPos -= halfWidth;
-      marqueeTrack.style.transform = `translateX(-${scrollPos}px)`;
-    }
-    rafId = requestAnimationFrame(step);
-  }
-
-  marqueeOuter.addEventListener('mouseenter', () => { paused = true; });
-  marqueeOuter.addEventListener('mouseleave', () => { paused = false; });
-  let touchTimer = null;
-  marqueeOuter.addEventListener('touchstart', () => { paused = true; clearTimeout(touchTimer); }, { passive: true });
-  marqueeOuter.addEventListener('touchend', () => { touchTimer = setTimeout(() => { paused = false; }, 2000); }, { passive: true });
-
-  measureHalf();
-  step();
-  window.addEventListener('resize', measureHalf, { passive: true });
 }
 
 // ===== RENDER FAQ =====
