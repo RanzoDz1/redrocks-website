@@ -384,7 +384,35 @@ if ('IntersectionObserver' in window) {
   animateEls.forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(24px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    animObserver.observe(el);
   });
 }
+
+// ===== CUSTOM PREMIUM SMOOTH SCROLL =====
+function easeOutQuart(t) { return 1 - (--t) * t * t * t; }
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', e => {
+    const id = anchor.getAttribute('href');
+    if (!id || id === '#') return;
+    const target = document.querySelector(id);
+    if (!target) return;
+    
+    e.preventDefault();
+    const hH = parseInt(getComputedStyle(document.documentElement).getPropertyValue('--header-h')) || 80;
+    const offset = hH + 10;
+    const targetPosition = target.getBoundingClientRect().top + window.scrollY - offset;
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    const duration = 800;
+    let startTime = null;
+
+    function animation(currentTime) {
+      if (startTime === null) startTime = currentTime;
+      const timeElapsed = currentTime - startTime;
+      const progress = Math.min(timeElapsed / duration, 1);
+      const ease = easeOutQuart(progress);
+      window.scrollTo(0, startPosition + (distance * ease));
+      if (timeElapsed < duration) requestAnimationFrame(animation);
+    }
+    requestAnimationFrame(animation);
+  });
+});
