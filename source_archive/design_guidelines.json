@@ -1,0 +1,79 @@
+{
+  "brand_identity": {
+    "name": "Red Rocks Carpet Cleaning & Upholstery Care",
+    "logo_url": "https://customer-assets.emergentagent.com/job_b1aaf2b5-fbc2-4620-aa79-e371dea47623/artifacts/5udviie8_redrockscarpetcleaning-logo02.png",
+    "contact": {
+      "phone": "+1 (303) 944-6070",
+      "email": "info@redrockscarpetcleaning.com",
+      "location": "Denver, CO"
+    },
+    "primary_color": "#7B2D26",
+    "secondary_color": "#008080",
+    "accent_color": "#D4AF37",
+    "neutral_light": "#F8F9FA",
+    "neutral_dark": "#1A202C",
+    "font_heading": "Oswald, sans-serif",
+    "font_body": "Inter, sans-serif",
+    "theme": "mixed"
+  },
+  "design_rules": {
+    "typography": {
+      "headings": "font-oswald font-bold uppercase tracking-wide",
+      "body": "font-inter text-slate-600 leading-relaxed",
+      "hero_text": "text-5xl md:text-7xl font-bold text-white drop-shadow-lg",
+      "section_title": "text-3xl md:text-4xl font-bold text-slate-900 mb-4"
+    },
+    "colors": {
+      "primary": "bg-[#7B2D26] text-white hover:bg-[#5e221d]",
+      "secondary": "bg-[#008080] text-white hover:bg-[#006666]",
+      "accent": "text-[#D4AF37]",
+      "background_light": "bg-white",
+      "background_dark": "bg-[#1A202C] text-white"
+    },
+    "layout": {
+      "container": "max-w-7xl mx-auto px-4 sm:px-6 lg:px-8",
+      "section_spacing": "py-16 md:py-24",
+      "grid_services": "grid grid-cols-1 md:grid-cols-3 gap-8",
+      "grid_features": "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
+    },
+    "components": {
+      "buttons": {
+        "primary": "rounded-full px-8 py-4 font-bold uppercase tracking-wider transition-all transform hover:scale-105 shadow-lg",
+        "secondary": "rounded-full px-6 py-3 border-2 border-white text-white hover:bg-white hover:text-[#7B2D26] transition-all"
+      },
+      "cards": {
+        "service": "bg-white rounded-xl shadow-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-slate-100",
+        "testimonial": "bg-slate-50 p-8 rounded-2xl border border-slate-200 relative"
+      }
+    }
+  },
+  "assets": {
+    "images": {
+      "hero_bg": "https://images.unsplash.com/photo-1557280694-f6a37845afc3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NzZ8MHwxfHNlYXJjaHwxfHxyZWQlMjByb2NrcyUyMGFtcGhpdGhlYXRyZSUyMGRlbnZlciUyMGxhbmRzY2FwZXxlbnwwfHx8fDE3NzM0NTE1MTd8MA&ixlib=rb-4.1.0&q=85",
+      "carpet_cleaning": "https://images.unsplash.com/photo-1742483359033-13315b247c74?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzR8MHwxfHNlYXJjaHwzfHxwcm9mZXNzaW9uYWwlMjBjYXJwZXQlMjBzdGVhbSUyMGNsZWFuaW5nJTIwd2FuZCUyMGFjdGlvbnxlbnwwfHx8fDE3NzM0NTE1MjJ8MA&ixlib=rb-4.1.0&q=85",
+      "upholstery_cleaning": "https://images.unsplash.com/photo-1768946131690-247c5319f0d8?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1ODh8MHwxfHNlYXJjaHwzfHx1cGhvbHN0ZXJ5JTIwY2xlYW5pbmclMjBzb2ZhJTIwcHJvZmVzc2lvbmFsfGVufDB8fHx8MTc3MzQ1MTUzMHww&ixlib=rb-4.1.0&q=85",
+      "rug_cleaning": "https://images.unsplash.com/photo-1761679296778-7f245d39148d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NjZ8MHwxfHNlYXJjaHwxfHxvcmllbnRhbCUyMHJ1ZyUyMGNsZWFuaW5nJTIwZGV0YWlsfGVufDB8fHx8MTc3MzQ1MTUzNHww&ixlib=rb-4.1.0&q=85",
+      "happy_family": "https://images.unsplash.com/photo-1762500824959-ad78b31b4161?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NTN8MHwxfHNlYXJjaHwxfHxoYXBweSUyMGZhbWlseSUyMHBsYXlpbmclMjBvbiUyMGNsZWFuJTIwY2FycGV0JTIwZmxvb3IlMjBob21lfGVufDB8fHx8MTc3MzQ1MTU1MHww&ixlib=rb-4.1.0&q=85",
+      "technician_placeholder": "https://images.unsplash.com/photo-1663528019558-17bcc1815981?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjY2NjV8MHwxfHNlYXJjaHwyfHxmcmllbmRseSUyMGNhcnBldCUyMGNsZWFuaW5nJTIwdGVjaG5pY2lhbiUyMHVuaWZvcm18ZW58MHx8fHwxNzczNDUxNTU0fDA&ixlib=rb-4.1.0&q=85"
+    },
+    "icons": "lucide-react"
+  },
+  "instructions_to_main_agent": [
+    "INSTALLATION: Run 'npm install lucide-react clsx tailwind-merge class-variance-authority @radix-ui/react-slot @radix-ui/react-dialog @radix-ui/react-label @radix-ui/react-accordion @radix-ui/react-scroll-area framer-motion'",
+    "FONTS: Add '<link href=\"https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Oswald:wght@400;600;700&display=swap\" rel=\"stylesheet\">' to public/index.html",
+    "TAILWIND: Update tailwind.config.js to include colors: primary: '#7B2D26', secondary: '#008080', accent: '#D4AF37'. Add fontFamily: sans: ['Inter'], heading: ['Oswald'].",
+    "COMPONENTS: Create a 'QuoteForm' component using Radix UI Dialog or custom modal. It must be accessible via a sticky 'Get Quote' button.",
+    "HERO SECTION: Use the 'hero_bg' image with a dark overlay (bg-black/50). Text should be white. Headline: 'Denver's Premier Carpet & Upholstery Care'. Subhead: 'Revitalize your home with Red Rocks deep cleaning technology.'",
+    "SERVICES SECTION: Use a Bento Grid layout. Cards should have hover effects (scale up slightly). Use the provided service images.",
+    "TRUST SIGNALS: Add a '5-Star Rated' badge and a section for 'Why Choose Us' (Eco-friendly, IICRC Certified, Satisfaction Guaranteed).",
+    "MOBILE: Ensure the 'Call Now' button is sticky at the bottom on mobile screens.",
+    "ANTI-AI RULES: Do NOT use generic 'blue' for everything. Use the brand Maroon and Teal. Do NOT center all text. Use left alignment for body copy. Add noise texture to the dark footer background."
+  ],
+  "universal_guidelines": [
+    "Do not use generic centered layouts.",
+    "Use 2-3x more spacing than typical designs.",
+    "Every interaction needs micro-animations.",
+    "Use glass-morphism effects with backdrop filters where appropriate.",
+    "Ensure all interactive elements have data-testid attributes."
+  ]
+}
