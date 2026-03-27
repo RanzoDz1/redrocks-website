@@ -443,14 +443,12 @@ h1, h2, h3, h4, h5 {
     rgba(26,32,44,0.4) 60%, 
     rgba(255,255,255,0.05) 100%
   );
-  backdrop-filter: blur(4px);
-  -webkit-backdrop-filter: blur(4px);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   padding: 28px;
   gap: 8px;
-  transition: background var(--transition), backdrop-filter var(--transition);
+  transition: background var(--transition);
 }
 .bento-card:hover .bento-overlay {
   background: linear-gradient(
@@ -459,8 +457,6 @@ h1, h2, h3, h4, h5 {
     rgba(26,32,44,0.6) 60%, 
     rgba(255,255,255,0.1) 100%
   );
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
 }
 .bento-tag {
   align-self: flex-start;

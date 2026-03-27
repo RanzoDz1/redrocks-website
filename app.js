@@ -428,6 +428,8 @@ if ('IntersectionObserver' in window) {
   animateEls.forEach(el => {
     el.style.opacity = '0';
     el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+    animObserver.observe(el);
   });
 }
 
