@@ -966,6 +966,27 @@ h1, h2, h3, h4, h5 {
   .nav-cta .btn-primary { display: none; }
   .btn-call { font-size: 0.85rem; }
   .nav-hamburger { display: flex; }
+
+  /* Trust bar: premium 2-column grid badges */
+  .trust-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .trust-item {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.78rem;
+  }
+  .trust-icon { font-size: 1.2rem; }
+  .trust-item strong { font-size: 0.82rem; }
+
+  /* Bento grid carousel */
+  .carousel-wrap {
+    position: relative;
+  }
   .bento-grid {
     display: flex;
     overflow-x: auto;
@@ -996,21 +1017,60 @@ h1, h2, h3, h4, h5 {
     min-width: 80vw;
     min-height: 240px;
   }
+
+  /* Carousel arrow buttons */
+  .carousel-arrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(26,32,44,0.85);
+    color: var(--white);
+    border: 1px solid rgba(255,255,255,0.15);
+    font-size: 1.5rem;
+    line-height: 1;
+    cursor: pointer;
+    transition: opacity 0.3s, background 0.3s;
+    backdrop-filter: blur(6px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  }
+  .carousel-arrow:hover { background: rgba(123,45,38,0.9); }
+  .carousel-arrow-left { left: 4px; }
+  .carousel-arrow-right { right: 4px; }
+
+  /* Process steps: stacked vertical layout (NOT carousel) */
   .process-steps {
-    flex-direction: row;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 16px 12px;
-    scrollbar-width: none;
+    flex-direction: column;
+    gap: 0;
+    padding: 0;
   }
-  .process-steps::-webkit-scrollbar { display: none; }
   .process-step {
-    flex: 0 0 75vw;
-    min-width: 75vw;
-    scroll-snap-align: start;
+    flex: none;
+    min-width: unset;
+    width: 100%;
+    text-align: left;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0 12px;
   }
+  .process-step:last-child { border-bottom: none; }
+  .process-step .step-number {
+    font-size: 2rem;
+    margin-bottom: 0;
+  }
+  .process-step h3 { margin-bottom: 6px; }
+  .process-step p { width: 100%; }
   .process-arrow { display: none; }
+
   .reviews-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr; gap: 32px; }
@@ -1023,6 +1083,11 @@ h1, h2, h3, h4, h5 {
   .hero-actions .btn-outline, .hero-actions .btn-primary { width: 100%; }
   .hero-stats { gap: 16px; }
   .stat-num { font-size: 1.5rem; }
+}
+
+/* Hide carousel arrows on desktop */
+@media (min-width: 769px) {
+  .carousel-arrow { display: none; }
 }
 
 @media (max-width: 480px) {
