@@ -983,66 +983,23 @@ h1, h2, h3, h4, h5 {
   .trust-icon { font-size: 1.2rem; }
   .trust-item strong { font-size: 0.82rem; }
 
-  /* Bento grid carousel */
-  .carousel-wrap {
-    position: relative;
-  }
+  /* Bento grid: 2-column compact grid */
   .bento-grid {
-    display: flex;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    gap: 16px;
-    padding: 0 16px 12px;
-    scrollbar-width: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
   }
-  .bento-grid::-webkit-scrollbar { display: none; }
   .bento-card {
-    flex: 0 0 80vw;
-    min-width: 80vw;
-    scroll-snap-align: start;
-    min-height: 240px;
+    min-height: 200px;
   }
   .bento-large {
-    grid-column: span 1;
-    grid-row: span 1;
-    flex: 0 0 80vw;
-    min-width: 80vw;
-    min-height: 280px;
-  }
-  .bento-wide {
-    grid-column: span 1;
-    grid-row: span 1;
-    flex: 0 0 80vw;
-    min-width: 80vw;
+    grid-column: 1 / -1;
     min-height: 240px;
   }
-
-  /* Carousel arrow buttons */
-  .carousel-arrow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 10;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: rgba(26,32,44,0.85);
-    color: var(--white);
-    border: 1px solid rgba(255,255,255,0.15);
-    font-size: 1.5rem;
-    line-height: 1;
-    cursor: pointer;
-    transition: opacity 0.3s, background 0.3s;
-    backdrop-filter: blur(6px);
-    box-shadow: 0 4px 12px rgba(0,0,0,0.25);
+  .bento-wide {
+    grid-column: 1 / -1;
+    min-height: 200px;
   }
-  .carousel-arrow:hover { background: rgba(123,45,38,0.9); }
-  .carousel-arrow-left { left: 4px; }
-  .carousel-arrow-right { right: 4px; }
 
   /* Process steps: stacked vertical layout (NOT carousel) */
   .process-steps {
@@ -1080,15 +1037,11 @@ h1, h2, h3, h4, h5 {
   .sticky-quote-btn { bottom: 80px; }
   .footer-bottom .container { flex-direction: column; text-align: center; }
   .hero-actions { flex-direction: column; }
-  .hero-actions .btn-outline, .hero-actions .btn-primary { width: 100%; }
+  .hero-actions .btn-outline, .hero-actions .btn-primary { width: 100%; justify-content: center; }
   .hero-stats { gap: 16px; }
   .stat-num { font-size: 1.5rem; }
 }
 
-/* Hide carousel arrows on desktop */
-@media (min-width: 769px) {
-  .carousel-arrow { display: none; }
-}
 
 @media (max-width: 480px) {
   .trust-inner { gap: 20px; }

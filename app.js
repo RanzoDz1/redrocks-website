@@ -104,7 +104,6 @@ document.addEventListener('DOMContentLoaded', function () {
   renderFAQ();
   initStickyButton();
   initScrollSpy();
-  initCarouselArrows();
   initBackInterceptor();
 });
 
@@ -519,38 +518,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     requestAnimationFrame(animation);
   });
 });
-
-// ===== CAROUSEL ARROWS (bento grid) =====
-function initCarouselArrows() {
-  document.querySelectorAll('.carousel-wrap').forEach(wrap => {
-    const track = wrap.querySelector('.bento-grid');
-    if (!track) return;
-    const leftBtn = wrap.querySelector('.carousel-arrow-left');
-    const rightBtn = wrap.querySelector('.carousel-arrow-right');
-    if (!leftBtn || !rightBtn) return;
-
-    function updateArrows() {
-      const scrollLeft = track.scrollLeft;
-      const maxScroll = track.scrollWidth - track.clientWidth;
-      leftBtn.style.opacity = scrollLeft <= 5 ? '0' : '1';
-      leftBtn.style.pointerEvents = scrollLeft <= 5 ? 'none' : 'auto';
-      rightBtn.style.opacity = scrollLeft >= maxScroll - 5 ? '0' : '1';
-      rightBtn.style.pointerEvents = scrollLeft >= maxScroll - 5 ? 'none' : 'auto';
-    }
-
-    leftBtn.addEventListener('click', () => {
-      track.scrollBy({ left: -(track.clientWidth * 0.8), behavior: 'smooth' });
-    });
-    rightBtn.addEventListener('click', () => {
-      track.scrollBy({ left: track.clientWidth * 0.8, behavior: 'smooth' });
-    });
-
-    track.addEventListener('scroll', updateArrows, { passive: true });
-    updateArrows();
-    // Re-check after images load
-    setTimeout(updateArrows, 500);
-  });
-}
 
 // ===== BACK BUTTON INTERCEPTOR =====
 function initBackInterceptor() {
