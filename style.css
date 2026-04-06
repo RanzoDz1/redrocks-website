@@ -977,15 +977,21 @@ h1, h2, h3, h4, h5 {
   }
   .bento-grid::-webkit-scrollbar { display: none; }
   .bento-card {
-    flex: 0 0 82vw;
+    flex: 0 0 80vw;
     scroll-snap-align: start;
-    min-height: auto;
+    min-height: 240px;
   }
-  .bento-large, .bento-wide {
+  .bento-large {
     grid-column: span 1;
     grid-row: span 1;
-    flex: 0 0 82vw;
-    min-height: auto;
+    flex: 0 0 80vw;
+    min-height: 280px;
+  }
+  .bento-wide {
+    grid-column: span 1;
+    grid-row: span 1;
+    flex: 0 0 80vw;
+    min-height: 240px;
   }
   .process-steps {
     flex-direction: row;
@@ -1001,19 +1007,6 @@ h1, h2, h3, h4, h5 {
     scroll-snap-align: start;
   }
   .process-arrow { display: none; }
-  .trust-inner {
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 16px;
-    scrollbar-width: none;
-  }
-  .trust-inner::-webkit-scrollbar { display: none; }
-  .trust-item {
-    flex: 0 0 70vw;
-    scroll-snap-align: start;
-  }
   .reviews-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr; gap: 32px; }
