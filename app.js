@@ -94,12 +94,17 @@ const FAQS_DATA = [
 // Netlify Forms handles the "forever" storage for all lead submissions.
 // No extra backend needed.
 
+// ===== SCROLL RESTORATION =====
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 // ===== INIT =====
 document.addEventListener('DOMContentLoaded', function () {
   renderReviews();
   renderFAQ();
   initStickyButton();
   initScrollSpy();
+  initBackInterceptor();
 });
 
 // ===== RENDER REVIEWS =====
@@ -390,18 +395,29 @@ function initStickyButton() {
   observer.observe(heroBtn);
 }
 
-// ===== SCROLL SPY / HEADER SHRINK =====
+// ===== SCROLL SPY / HEADER SHRINK + HIDE ON SCROLL DOWN =====
 function initScrollSpy() {
   const header = document.querySelector('.site-header');
+  if (!header) return;
+  header.style.transition = 'transform 0.3s cubic-bezier(0.4,0,0.2,1), background 0.3s, box-shadow 0.3s';
+  var lastScroll = 0;
   window.addEventListener('scroll', () => {
-    if (window.scrollY > 80) {
+    var y = window.scrollY;
+    if (y > 80) {
       header.style.background = 'rgba(26,32,44,0.98)';
       header.style.boxShadow = '0 2px 20px rgba(0,0,0,0.3)';
     } else {
       header.style.background = 'rgba(26,32,44,0.95)';
       header.style.boxShadow = 'none';
     }
-  });
+    // Hide on scroll down, show on scroll up
+    if (y > 120 && y > lastScroll) {
+      header.style.transform = 'translateY(-100%)';
+    } else {
+      header.style.transform = 'translateY(0)';
+    }
+    lastScroll = y;
+  }, { passive: true });
 }
 
 // ===== KEYBOARD ESCAPE TO CLOSE MODALS =====
@@ -462,3 +478,36 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     requestAnimationFrame(animation);
   });
 });
+
+// ===== BACK BUTTON INTERCEPTOR =====
+function initBackInterceptor() {
+  history.pushState({ __rr: true }, '');
+  window.addEventListener('popstate', function () {
+    // 1. Close quote modal if open
+    var quoteModal = document.getElementById('quoteModal');
+    if (quoteModal && quoteModal.classList.contains('open')) {
+      closeQuoteModal();
+      history.pushState({ __rr: true }, '');
+      return;
+    }
+    // 2. Close service modal if open
+    var serviceModal = document.getElementById('serviceModal');
+    if (serviceModal && serviceModal.classList.contains('open')) {
+      closeServiceModal();
+      history.pushState({ __rr: true }, '');
+      return;
+    }
+    // 3. Close mobile nav if open
+    var mNav = document.getElementById('mobileNav');
+    if (mNav && mNav.classList.contains('open')) {
+      mNav.classList.remove('open');
+      history.pushState({ __rr: true }, '');
+      return;
+    }
+    // 4. Scroll to top
+    if (window.scrollY > 50) {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      history.pushState({ __rr: true }, '');
+    }
+  });
+}
