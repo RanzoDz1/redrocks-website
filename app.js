@@ -129,97 +129,51 @@ function renderReviews() {
     `;
   }).join('');
   
-  // Initialize Marquee
-  setTimeout(() => initMarquee(grid), 100);
+  // Initialize carousel
+  setTimeout(() => initReviewsCarousel(grid), 100);
 }
 
-function initMarquee(marqueeTrack) {
-  const marqueeOuter = marqueeTrack.parentElement;
-  if (!marqueeTrack || !marqueeOuter) return;
+function initReviewsCarousel(track) {
+  if (!track) return;
 
-  const origCards = [...marqueeTrack.children];
-  origCards.forEach(card => {
-    const clone = card.cloneNode(true);
-    clone.setAttribute('aria-hidden', 'true');
-    marqueeTrack.appendChild(clone);
+  var leftBtn = document.querySelector('.reviews-arrow.left');
+  var rightBtn = document.querySelector('.reviews-arrow.right');
+
+  function getScrollAmount() {
+    var card = track.querySelector('.review-card');
+    if (!card) return track.clientWidth;
+    var gap = parseFloat(window.getComputedStyle(track).gap) || 24;
+    return card.offsetWidth + gap;
+  }
+
+  function updateArrows() {
+    if (!leftBtn || !rightBtn) return;
+    leftBtn.classList.toggle('hidden', track.scrollLeft <= 2);
+    rightBtn.classList.toggle('hidden', track.scrollLeft >= track.scrollWidth - track.clientWidth - 2);
+  }
+
+  if (leftBtn) leftBtn.addEventListener('click', function() {
+    track.scrollBy({ left: -getScrollAmount(), behavior: 'smooth' });
+    clearInterval(autoTimer);
+  });
+  if (rightBtn) rightBtn.addEventListener('click', function() {
+    track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
+    clearInterval(autoTimer);
   });
 
-  let scrollPos = 0;
-  const SPEED = 0.55;
-  let paused = false;
-  let rafId = null;
-  let halfWidth = 0;
+  track.addEventListener('scroll', updateArrows, { passive: true });
+  window.addEventListener('resize', updateArrows);
+  setTimeout(updateArrows, 300);
 
-  function measureHalf() {
-    halfWidth = marqueeTrack.scrollWidth / 2;
-  }
-
-  function step() {
-    if (!paused && halfWidth > 0) {
-      scrollPos += SPEED;
-      if (scrollPos >= halfWidth) scrollPos -= halfWidth;
-      marqueeTrack.style.transform = `translateX(-${scrollPos}px)`;
+  var autoTimer = setInterval(function() {
+    if (track.scrollLeft >= track.scrollWidth - track.clientWidth - 2) {
+      track.scrollTo({ left: 0, behavior: 'smooth' });
+    } else {
+      track.scrollBy({ left: getScrollAmount(), behavior: 'smooth' });
     }
-    rafId = requestAnimationFrame(step);
-  }
+  }, 4500);
 
-  marqueeOuter.addEventListener('mouseenter', () => { paused = true; });
-  marqueeOuter.addEventListener('mouseleave', () => { paused = false; });
-
-  // Touch momentum drag for reviews marquee
-  let touchStartX = 0;
-  let touchStartTime = 0;
-  let touchLastX = 0;
-  let touchVelocity = 0;
-  let momentumRaf = null;
-
-  marqueeOuter.addEventListener('touchstart', (e) => {
-    paused = true;
-    if (momentumRaf) { cancelAnimationFrame(momentumRaf); momentumRaf = null; }
-    touchStartX = e.touches[0].clientX;
-    touchLastX = touchStartX;
-    touchStartTime = Date.now();
-    touchVelocity = 0;
-  }, { passive: true });
-
-  marqueeOuter.addEventListener('touchmove', (e) => {
-    const currentX = e.touches[0].clientX;
-    const delta = touchLastX - currentX;
-    scrollPos += delta;
-    if (halfWidth > 0) {
-      if (scrollPos < 0) scrollPos += halfWidth;
-      if (scrollPos >= halfWidth) scrollPos -= halfWidth;
-    }
-    marqueeTrack.style.transform = `translateX(-${scrollPos}px)`;
-    touchVelocity = currentX - touchLastX;
-    touchLastX = currentX;
-  }, { passive: true });
-
-  marqueeOuter.addEventListener('touchend', () => {
-    // Apply momentum with friction
-    const friction = 0.95;
-    function momentumStep() {
-      if (Math.abs(touchVelocity) < 0.5) {
-        momentumRaf = null;
-        // Resume auto-scroll after momentum ends
-        setTimeout(() => { paused = false; }, 1500);
-        return;
-      }
-      scrollPos -= touchVelocity;
-      touchVelocity *= friction;
-      if (halfWidth > 0) {
-        if (scrollPos < 0) scrollPos += halfWidth;
-        if (scrollPos >= halfWidth) scrollPos -= halfWidth;
-      }
-      marqueeTrack.style.transform = `translateX(-${scrollPos}px)`;
-      momentumRaf = requestAnimationFrame(momentumStep);
-    }
-    momentumRaf = requestAnimationFrame(momentumStep);
-  }, { passive: true });
-
-  measureHalf();
-  step();
-  window.addEventListener('resize', measureHalf, { passive: true });
+  track.addEventListener('touchstart', function() { clearInterval(autoTimer); }, { passive: true });
 }
 
 // ===== RENDER FAQ =====

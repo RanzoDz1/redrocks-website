@@ -583,19 +583,25 @@ h1, h2, h3, h4, h5 {
 .reviews-marquee-outer {
   position: relative;
   overflow: hidden;
-  padding: 20px 0 60px;
-  mask-image: linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 7%, #000 93%, transparent 100%);
+  padding: 20px 0 24px;
 }
 .reviews-marquee-track {
   display: flex;
   gap: 24px;
-  width: max-content;
-  will-change: transform;
+  overflow-x: scroll;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+  width: 100%;
+  will-change: auto;
 }
+.reviews-marquee-track::-webkit-scrollbar { display: none; }
 .review-card {
-  width: 370px;
+  flex: 0 0 calc(33.333% - 16px);
+  min-width: 0;
   flex-shrink: 0;
+  scroll-snap-align: start;
   background: var(--white);
   border-radius: var(--radius);
   padding: 32px;
@@ -634,6 +640,41 @@ h1, h2, h3, h4, h5 {
 }
 .review-name { font-family: 'Oswald', sans-serif; font-size: 0.95rem; color: var(--dark); text-transform: uppercase; }
 .review-service { font-size: 0.78rem; color: var(--secondary); margin-top: 2px; }
+
+/* Reviews Navigation */
+.reviews-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  margin-top: 24px;
+}
+.reviews-arrow {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: var(--white);
+  color: var(--dark);
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+.reviews-arrow:hover {
+  background: var(--accent);
+  color: var(--white);
+  border-color: var(--accent);
+}
+.reviews-arrow.hidden {
+  opacity: 0.3;
+  pointer-events: none;
+}
+
 .reviews-rating-bar {
   background: var(--white);
   border-radius: var(--radius);
@@ -959,6 +1000,7 @@ h1, h2, h3, h4, h5 {
   .faq-grid { grid-template-columns: 1fr; gap: 48px; }
   .contact-grid { grid-template-columns: 1fr; gap: 48px; }
   .footer-inner { grid-template-columns: 1fr 1fr; gap: 40px; }
+  .review-card { flex: 0 0 calc(50% - 12px); }
 }
 
 @media (max-width: 768px) {
@@ -1029,6 +1071,7 @@ h1, h2, h3, h4, h5 {
   .process-arrow { display: none; }
 
   .reviews-grid { grid-template-columns: 1fr; }
+  .review-card { flex: 0 0 100%; }
   .form-row { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr; gap: 32px; }
   .contact-form-wrap { padding: 28px 20px; }
