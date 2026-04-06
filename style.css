@@ -966,11 +966,54 @@ h1, h2, h3, h4, h5 {
   .nav-cta .btn-primary { display: none; }
   .btn-call { font-size: 0.85rem; }
   .nav-hamburger { display: flex; }
-  .bento-grid { grid-template-columns: 1fr; }
-  .bento-large { min-height: 320px; }
-  .bento-wide { grid-column: span 1; }
-  .process-steps { flex-direction: column; }
-  .process-arrow { transform: rotate(90deg); }
+  .bento-grid {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    gap: 16px;
+    padding: 0 16px 12px;
+    scrollbar-width: none;
+  }
+  .bento-grid::-webkit-scrollbar { display: none; }
+  .bento-card {
+    flex: 0 0 82vw;
+    scroll-snap-align: start;
+    min-height: auto;
+  }
+  .bento-large, .bento-wide {
+    grid-column: span 1;
+    grid-row: span 1;
+    flex: 0 0 82vw;
+    min-height: auto;
+  }
+  .process-steps {
+    flex-direction: row;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 16px 12px;
+    scrollbar-width: none;
+  }
+  .process-steps::-webkit-scrollbar { display: none; }
+  .process-step {
+    flex: 0 0 75vw;
+    scroll-snap-align: start;
+  }
+  .process-arrow { display: none; }
+  .trust-inner {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 16px;
+    scrollbar-width: none;
+  }
+  .trust-inner::-webkit-scrollbar { display: none; }
+  .trust-item {
+    flex: 0 0 70vw;
+    scroll-snap-align: start;
+  }
   .reviews-grid { grid-template-columns: 1fr; }
   .form-row { grid-template-columns: 1fr; }
   .footer-inner { grid-template-columns: 1fr; gap: 32px; }
@@ -987,7 +1030,6 @@ h1, h2, h3, h4, h5 {
 
 @media (max-width: 480px) {
   .trust-inner { gap: 20px; }
-  .trust-item:nth-child(3), .trust-item:nth-child(4) { display: none; }
   .reviews-rating-bar { flex-direction: column; }
   .rating-big { flex-direction: column; text-align: center; gap: 10px; }
   .why-img-frame img { height: 320px; }
