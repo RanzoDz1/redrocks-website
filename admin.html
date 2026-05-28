@@ -733,9 +733,11 @@
     </div>
 
     <script>
-        // Netlify Configuration (Hardcoded for "forever" seamless use)
-        let NETLIFY_TOKEN = '***REMOVED***';
-        let NETLIFY_SITE_ID = 'ac58eaff-948b-4254-91fa-6fc1c52575ae';
+        // Netlify Configuration. Loaded from localStorage; set via Settings panel.
+        // Never hardcode tokens here — this file is committed to a public repo.
+        // TODO: move admin actions behind a Netlify Function so the token can stay server-side.
+        let NETLIFY_TOKEN = localStorage.getItem('netlify_token') || '';
+        let NETLIFY_SITE_ID = localStorage.getItem('netlify_site_id') || '';
 
         let authHeader = '';
         let allQuotes = [];
@@ -753,8 +755,11 @@
             btn.disabled = true;
             err.style.display = 'none';
 
-            // Local-only authentication for permanent access
-            if (user === 'admin' && pass === '***REMOVED***') {
+            // Client-side check only — NOT real auth. Replace with Netlify Identity
+            // or a serverless function for anything sensitive.
+            // TODO: change CHANGE_ME_BEFORE_DEPLOY to a strong password before deploying,
+            // and never commit the deployed value to a public repo.
+            if (user === 'admin' && pass === 'CHANGE_ME_BEFORE_DEPLOY') {
                 authHeader = 'Basic ' + btoa(user + ':' + pass);
                 enterDashboard();
             } else {
